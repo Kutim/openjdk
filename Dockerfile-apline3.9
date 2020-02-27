@@ -1,0 +1,11 @@
+FROM openjdk:8-jdk-alpine3.9
+
+LABEL maintainer="Kutim <1252900197@qq.com>"
+
+ENV TZ Asia/Shanghai
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories \
+  && apk add --no-cache tzdata \ 
+  && ln -sf /usr/share/zoneinfo/$TZ /etc/localtime \
+    && echo $TZ > /etc/timezone \
+    && apk del tzdata
